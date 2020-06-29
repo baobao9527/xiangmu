@@ -1,0 +1,26 @@
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<form id="deviceApplyFrom">
+    <input type="hidden" name="authbatch.id" value="" id="id_authbatch">
+    <table class="grid">
+        <tr>
+            <td align="left">申请数量</td>
+            <td><input type="text" name="authbatch.devices" class="txt01 easyui-validatebox"
+                       style="width:320px;"
+                       id="devices_authbatch"
+                       data-options="required:true,validType:['number','length[0,8]']"/></td>
+        </tr>
+
+        <tr>
+            <td align="left">申请说明</td>
+            <td>
+               <textarea name="authbatch.remark" id="remark"
+                         class="txt01 easyui-validatebox"
+                         data-options="required:true,validType:['string','length[0,250]']"
+                         style="width: 320px;height: 50px;"></textarea>
+            </td>
+        </tr>
+    </table>
+</form>

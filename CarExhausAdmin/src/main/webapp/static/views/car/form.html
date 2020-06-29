@@ -1,0 +1,228 @@
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<form id="carForm">
+    <div id="car" fit="true" style="overflow: hidden;">
+        <div title="车辆基本信息维护" style="padding: 2px; ">
+            <input type="hidden" name="car.id" value="">
+            <input type="hidden" name="driver.id" value="">
+            <table class="grid">
+                <tr>
+                    <td align="left">车牌号码：</td>
+                    <td colspan="1"><input type="text" class="txt01 easyui-validatebox" id="car_no"
+                                           data-options="required:true,missingMessage:'请输入车牌号码',validType:'carNo'"
+                                           name="car.car_no"/></td>
+                    <td align="left">车牌颜色：</td>
+                    <td colspan="1"><input type="text" class="txt01 easyui-combobox"
+                                           id="car_no_color" style="width: 70px;"
+                                           name="car.car_no_color"/></td>
+                    <td align="left">车辆标识：</td>
+                    <td colspan="1"><input type="text" class="txt01 easyui-combobox" id="car_flag"
+                                           name="car.car_flag" style="width: 100px;"/></td>
+                </tr>
+                <tr>
+                    <td align="left">区域：</td>
+                    <td colspan="2">
+                        <input type="text" name="area_province" style="width: 120px;"
+                               class="txt01 easyui-combobox"
+                               id="area_province"/>
+                        <input type="text" name="area_city" style="width: 120px;"
+                               class="txt01 easyui-combobox"
+                               id="area_city"/>
+                    </td>
+                    <td align="left">车架号：</td>
+                    <td colspan="2"><input type="text" name="car.car_framework_no"
+                                           class="txt01 easyui-validatebox"
+                                           id="car_framework_no"
+                                           data-options="required:true,missingMessage:'请输入车架号'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">车辆型号：</td>
+                    <td ><input type="text" name="car.car_model"
+                                           class="txt01 easyui-validatebox"
+                                           id="car_model"
+                                           data-options="required:true,missingMessage:'请输入车辆型号'"/>
+                    </td>
+                    <td align="left">代理商：</td>
+                    <td colspan="3">
+                        <input type="text" name="car.agent"
+                               class="txt01 easyui-validatebox"
+                               id="oper" style="width: 300px;"
+                               data-options="required:true,missingMessage:'请输入代理商'"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="left" rowspan="2">司机姓名：</td>
+                    <td align="left">司机姓名：</td>
+                    <td ><input type="text" name="driver.name"
+                                           class="txt01 easyui-validatebox"
+                                           id="driverName"
+                                           data-options="required:true,missingMessage:'请输入司机姓名'"/>
+                    </td>
+                    <td align="left">联系方式：</td>
+                    <td colspan="2"><input type="text" name="driver.mobile_phone"
+                                           class="txt01 easyui-validatebox"
+                                           id="mobile_phone"
+                                           data-options="required:true,missingMessage:'请输入联系方式',validType:'mobile'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">隶属单位：</td>
+                    <td colspan="4"><input type="text" name="driver.work_unit"
+                                           class="txt01 easyui-validatebox"
+                                           id="work_unit" style="width: 400px;"
+                                           data-options="required:true,missingMessage:'请输入隶属单位'"/>
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td align="left" rowspan="2">发动机参数：</td>
+                    <td align="left">型号：</td>
+                    <td><input type="text" name="car.engine_model"
+                                           class="txt01 easyui-validatebox"
+                                           id="engine_model"
+                                           data-options="required:true,missingMessage:'请输入发动机型号'"/>
+                    </td>
+                    <td align="left">功率：</td>
+                    <td colspan="2"><input type="text" name="car.engine_power"
+                                           class="txt01 easyui-validatebox"
+                                           id="engine_power"
+                                           data-options="required:true,missingMessage:'请输入发动机功率',validType: 'floats'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">排量：</td>
+                    <td><input type="text" name="car.engine_discharge_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="engine_discharge_value"
+                                           data-options="required:true,missingMessage:'请输入发动机排量',validType: 'floats'"/>
+                    </td>
+                    <td align="left">喷油方式：</td>
+                    <td colspan="2"><input type="text" name="car.engine_gass_type"
+                                           class="txt01 easyui-combobox"
+                                           id="engine_gass_type"/></td>
+                </tr>
+
+                <tr>
+                    <td rowspan="4">初始排放参数</td>
+                    <td align="left" colspan="1">烟度平均值（自有加速）：</td>
+                    <td colspan="1"><input type="text" name="car.inital_smoke_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="inital_smoke_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值',validType: 'floats'"/>
+                    </td>
+                    <td align="left" colspan="1">轮边功率：</td>
+                    <td colspan="2"><input type="text" name="car.wheel_power"
+                                           class="txt01 easyui-validatebox"
+                                           id="wheel_power"
+                                           data-options="required:true,missingMessage:'请输入轮边功率',validType: 'floats'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" colspan="1">初始烟度平均值(加载减速80%)：</td>
+                    <td colspan="1"><input type="text" name="car.inital_smoke_80_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="inital_smoke_80_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值(加载减速80%)',validType: 'floats'"/>
+                    </td>
+                    <td align="left" colspan="1">初始烟度平均值(加载减速90%)：</td>
+                    <td colspan="2"><input type="text" name="car.inital_smoke_90_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="inital_smoke_90_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值(加载减速90%)',validType: 'floats'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" colspan="1">初始烟度平均值(加载减速100%)：</td>
+                    <td colspan="1"><input type="text" name="car.inital_smoke_100_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="inital_smoke_100_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值(加载减速100%)',validType: 'floats'"/>
+                    </td>
+                    <td align="left" colspan="1">初始氮氧值：</td>
+                    <td colspan="2"><input type="text" name="car.inital_h2_o2_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="inital_h2_o2_value"
+                                           data-options="required:true,missingMessage:'请输入初始氮氧值',validType: 'floats'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" >原车排放标准：</td>
+                    <td colspan="4"><input type="text" name="car.car_discharge_standard"
+                                           class="txt01 easyui-validatebox"
+                                           id="car_discharge_standard" style="width: 400px;"
+                                           data-options="required:true,missingMessage:'请输入原车排放标准'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3">安装净化器后排放值</td>
+                    <td align="left" colspan="1">烟度平均值（自有加速）：</td>
+                    <td colspan="1"><input type="text" name="car.after_smoke_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="after_smoke_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值',validType: 'floats'"/>
+                    </td>
+                    <td align="left" colspan="1">轮边功率：</td>
+                    <td colspan="2"><input type="text" name="car.after_wheel_power"
+                                           class="txt01 easyui-validatebox"
+                                           id="after_wheel_power"
+                                           data-options="required:true,missingMessage:'请输入轮边功率',validType: 'floats'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" colspan="1">初始烟度平均值(加载减速80%)：</td>
+                    <td colspan="1"><input type="text" name="car.after_smoke_80_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="after_smoke_80_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值(加载减速80%)',validType: 'floats'"/>
+                    </td>
+                    <td align="left" colspan="1">初始烟度平均值(加载减速90%)：</td>
+                    <td colspan="2"><input type="text" name="car.after_smoke_90_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="after_smoke_90_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值(加载减速90%)',validType: 'floats'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" colspan="1">初始烟度平均值(加载减速100%)：</td>
+                    <td colspan="1"><input type="text" name="car.after_smoke_100_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="after_smoke_100_value"
+                                           data-options="required:true,missingMessage:'请输入初始烟度平均值(加载减速100%)',validType: 'floats'"/>
+                    </td>
+
+                    <td align="left" colspan="1">初始氮氧值：</td>
+                    <td colspan="2"><input type="text" name="car.after_h2_o2_value"
+                                           class="txt01 easyui-validatebox"
+                                           id="after_h2_o2_value"
+                                           data-options="required:true,missingMessage:'请输入初始氮氧值',validType: 'floats'"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <!--<td align="left">前段显示选择项：</td>-->
+                    <!--<td colspan="1"><input type="text" name="car.display_flag"-->
+                                           <!--class="txt01 easyui-combobox"-->
+                                           <!--id="display_flag"/></td>-->
+                    <td align="left">SIM卡号：</td>
+                    <td colspan="1"><input type="text" name="car.sim_card"
+                                           class="txt01 easyui-validatebox"
+                                           id="sim_card"
+                                           data-options="required:true,missingMessage:'请输入SIM卡号',validType:'mobile'"/>
+                    <td align="left">终端生产厂商：</td>
+                    <td colspan="3"><input type="text" name="car.terminal"
+                                           class="txt01 easyui-validatebox"
+                                           id="terminal" style="width: 300px;"
+                                           data-options="required:true,missingMessage:'请输入终端生产厂商'"/>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="monitorRecord">
+    <sql id="search.easyui.datagrid">
+        SELECT
+ci.*
+  -- @where
+FROM mo_car_info ci
+   -- @condition
+WHERE 1 = 1
+        order by create_time desc
+    </sql>
+</sqlGroup>

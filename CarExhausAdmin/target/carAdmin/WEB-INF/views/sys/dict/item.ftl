@@ -1,0 +1,32 @@
+<form id="uiform">
+    <div id="staffTab" fit="true" style="overflow: hidden;">
+        <div title="字典维护" style="padding: 2px; ">
+            <input type="hidden" name="dict.id" value="">
+            <input type="hidden" name="dict.parent" id="dict_parent_id" value="">
+            <table class="grid">
+                <tr>
+                    <td align="left">编号：</td>
+                    <td><input type="text" class="txt01 easyui-validatebox" id="code"
+                               data-options="required:true,missingMessage:'自动生成编号'" value="${code!}" name="dict.code"/></td>
+                </tr>
+                <tr>
+                    <td align="left">名称：</td>
+                    <td><input type="text" name="dict.name" class="txt01 easyui-validatebox"
+                               id="name" data-options="required:true,missingMessage:'请输入名称'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">描述：</td>
+                    <td><textarea type="text" name="dict.description" class="txt01 easyui-validatebox"
+                               id="description"></textarea></td>
+                </tr>
+                <tr>
+                    <td align="left">显示排序：</td>
+                    <td><input type="text" name="dict.order_code" class="txt01 easyui-validatebox"
+                               id="order_code"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,28 @@
+<form id="setpassform">
+    <input type="hidden" id="id" name="user.id">
+    <table class="grid">
+        <tr>
+            <td align="left">登录名称</td>
+            <td><input type="text" name="user.name" class="txt01"
+                       id="name" readonly="true" disabled/></td>
+        </tr>
+
+        <tr>
+            <td align="left">登录密码</td>
+            <td><input type="password" class="txt01 easyui-validatebox"
+                       id="password" name="password"
+                       data-options="required:true,validType:['string','length[0,100]']"/></td>
+        </tr>
+
+        <tr>
+            <td align="left">确认密码</td>
+            <td><input type="password" class="txt01 easyui-validatebox"
+                       id="reppass" name="confirmpassword"
+                       data-options="required:true,validType:['string','length[0,100]']"/></td>
+        </tr>
+
+    </table>
+
+</form>
+
+

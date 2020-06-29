@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="sys.notice">
+
+    <sql id="easyui.datagrid">
+        select
+            m.id,
+            m.title,
+            m.summary,
+            m.publish_time,
+            m.create_time,
+            mu.name as publisher,
+            m.status
+        -- @where
+        from
+            mo_notice m LEFT JOIN mo_user mu ON mu.id = m.publisher
+        -- @condition
+        where
+            m.delete_flag = ?
+        order by top_flag desc,order_no desc,publish_time
+    </sql>
+
+    <!--管理员登录-->
+    <sql id="admin.easyui.datagrid">
+        select
+            m.id,
+            m.title,
+            m.summary,
+            m.publish_time,
+            m.create_time,
+            mu.name as publisher,
+            m.status
+        -- @where
+        from
+            mo_notice m LEFT JOIN mo_user mu ON mu.id = m.publisher
+        -- @condition
+        where
+            m.delete_flag = ?
+        order by top_flag desc,order_no desc,publish_time
+    </sql>
+
+    <sql id="findByHome">
+        select
+            m.id,
+            m.title,
+            m.summary,
+            m.publish_time,
+            m.create_time,
+            mu.name as publisher
+        from
+            mo_notice m LEFT JOIN mo_user mu ON mu.id = m.publisher
+        where
+            m.delete_flag = ? and m.status=?
+        order by top_flag desc,order_no desc,publish_time LIMIT ?
+    </sql>
+
+</sqlGroup>

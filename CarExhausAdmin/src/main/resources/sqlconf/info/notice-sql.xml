@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="info.notice">
+
+  <sql id="easyui.datagrid">
+    SELECT
+      m.id,
+      m.title,
+      m.summary,
+      m.publish_time,
+      m.create_time,
+      mu.name AS publisher,
+      m.status
+      -- @where
+    FROM
+    mo_notice m LEFT JOIN mo_user mu ON mu.id = m.publisher
+    -- @condition
+    WHERE
+    m.delete_flag = ?
+    ORDER BY top_flag DESC, order_no DESC, publish_time
+  </sql>
+
+
+  <sql id="findByHome">
+    SELECT
+      m.id,
+      m.title,
+      m.summary,
+      m.publish_time,
+      m.create_time,
+      mu.name AS publisher,
+      (SELECT count(1)
+       FROM mo_notice_view mnv
+       WHERE mnv.notice_id = m.id AND mnv.user_id = ?) AS views
+    FROM
+      mo_notice m LEFT JOIN mo_user mu ON mu.id = m.publisher
+    WHERE
+      m.delete_flag = ? AND m.status = ?
+    ORDER BY top_flag DESC, order_no DESC, publish_time
+    LIMIT ?
+  </sql>
+
+  <sql id="findByUserAndNotice">
+    SELECT * from mo_notice_view where notice_id = ? and user_id = ?
+  </sql>
+
+</sqlGroup>

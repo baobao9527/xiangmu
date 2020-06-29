@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="sys.roleresource">
+
+    <!--根据角色的id获得该角色所拥有的资源的id号-->
+    <sql id="resourceIdByRoleId">
+        select
+           resource,
+           role_id
+        from
+           mo_role_resource
+        where
+           role_id=?
+    </sql>
+
+</sqlGroup>

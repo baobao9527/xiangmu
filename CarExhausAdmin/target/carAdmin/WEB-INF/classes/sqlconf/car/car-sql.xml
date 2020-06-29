@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="car">
+    <sql id="easyui.datagrid">
+        SELECT
+        ci.*,
+        mcfc.*,
+        md.device_code,
+        mu.username as agentName
+        -- @where
+        FROM mo_car_info ci
+        LEFT JOIN mo_car_failure_criteria mcfc ON ci.id = mcfc.car_id
+        LEFT JOIN mo_device md ON md.id = ci.device_id
+        LEFT JOIN mo_user mu ON mu.id = ci.agent
+        -- @condition
+        WHERE 1 = 1
+    </sql>
+    <sql id="agent.easyui.datagrid">
+        SELECT
+        ci.*,
+        mcfc.*,
+        md.device_code,
+        mu.username as agentName
+        -- @where
+        FROM mo_car_info ci
+        LEFT JOIN mo_car_failure_criteria mcfc ON ci.id = mcfc.car_id
+        LEFT JOIN mo_device md ON md.id = ci.device_id
+        LEFT JOIN mo_user mu ON mu.id = ci.agent
+        -- @condition
+        WHERE exists(select 1 from mo_car_permission mcp where mcp.car_id = ci.id and mcp.user_id = ?)
+    </sql>
+    <sql id="normal.easyui.datagrid">
+        SELECT
+        ci.*,
+        mcfc.*,
+        md.device_code,
+        mu.username as agentName
+        -- @where
+        FROM mo_car_info ci
+        LEFT JOIN mo_car_failure_criteria mcfc ON ci.id = mcfc.car_id
+        LEFT JOIN mo_device md ON md.id = ci.device_id
+        LEFT JOIN mo_user mu ON mu.id = ci.agent
+        -- @condition
+        WHERE ci.operator = ?
+    </sql>
+    <sql id="delCar">
+        DELETE FROM mo_car_info WHERE 1=1
+    </sql>
+    <sql id="findByCarType">
+        SELECT
+        count(*) c,
+        mi.car_flag,
+        d.name
+        FROM
+        mo_car_info mi
+        LEFT JOIN mo_dict d ON d. code = mi.car_flag
+        AND d.parent = (select id FROM mo_dict WHERE code='YIIBFH')
+        WHERE mi.device_id IS NOT NULL
+    </sql>
+    <sql id="findByDischarge">
+        SELECT count(*) c,t.name from (SELECT
+        CASE
+        WHEN engine_discharge_value BETWEEN 0
+        and 1 THEN
+        '1L'
+        WHEN engine_discharge_value BETWEEN 1
+        and 2 THEN
+        '2L'
+        WHEN engine_discharge_value BETWEEN 2
+        and 3 THEN
+        '3L'
+        WHEN engine_discharge_value BETWEEN 3
+        and 4 THEN
+        '4L'
+        WHEN engine_discharge_value BETWEEN 4
+        and 5 THEN
+        '5L'
+        WHEN engine_discharge_value BETWEEN 5
+        and 6 THEN
+        '6L'
+        WHEN engine_discharge_value BETWEEN 6
+        and 7 THEN
+        '7L'
+        ELSE
+        '8L'
+        END as name
+        FROM
+        mo_car_info WHERE 1=1 AND device_id IS NOT NULL ) t
+        GROUP BY t.name
+    </sql>
+    <sql id="findForArea">
+        SELECT
+        COUNT(*) c,ma.`name`
+        FROM
+        mo_car_info mi
+        LEFT JOIN mo_area ma ON ma.sn = mi.area_sn
+        WHERE 1=1 and ma.name is NOT NULL
+        AND ma.sn LIKE ?
+        GROUP BY ma.name
+    </sql>
+    <sql id="findForProvice">
+        SELECT
+        count(*) c,ma.`name`,left(mi.`area_sn`,4) as a
+        FROM
+        mo_car_info mi
+        left join mo_area ma on ma.sn = left(mi.`area_sn`,4)
+        WHERE 1=1 and ma.name is not null
+        GROUP BY ma.name
+    </sql>
+    <sql id="findByCarNo">
+        SELECT * FROM mo_car_info WHERE car_no = ?
+    </sql>
+
+
+    <sql id="agents.easyui.datagrid">
+        SELECT mu.id, mu.name, mu.phone, mu.username, mu.birthday, mu.gender, mu.create_time, type,
+        mcpn.cn as assign
+        -- @where
+        FROM mo_user mu LEFT JOIN
+        (select count(1) cn , mcp.user_id from mo_car_permission mcp where mcp.car_id = ? GROUP BY mcp.user_id) mcpn ON
+        mcpn.user_id = mu.id
+        -- @condition
+        WHERE mu.type = ?
+    </sql>
+    <sql id="findByDeviceId">
+        SELECT COUNT(1) c FROM mo_car_info WHERE device_id = ? AND id != ?
+    </sql>
+</sqlGroup>

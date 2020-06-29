@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="carGps">
+    <sql id="findByCarNo">
+        SELECT mci.*, mcg.*
+        FROM mo_car_gps mcg
+                 INNER JOIN mo_car_info mci
+                            ON mci.device_id = mcg.device_id
+        WHERE mcg.device_id IS NOT NULL
+          AND mci.car_no = ?
+          AND mcg.baidu_latitude >= 1
+          AND
+            mcg.baidu_longitude >= 1
+        ORDER BY mcg.create_time DESC
+        LIMIT 1
+    </sql>
+    <sql id="findByDeviceId">
+        SELECT mcg.id, mcg.baidu_longitude, mcg.baidu_latitude, mcg.create_time, mcg.timestamp
+        FROM mo_car_gps mcg
+        WHERE mcg.device_id = ?
+          AND mcg.baidu_latitude >= 1
+          AND mcg.baidu_longitude >= 1
+        ORDER BY mcg.timestamp DESC
+        LIMIT 1
+    </sql>
+    <sql id="getData">
+        SELECT mci.car_no, mcg.baidu_longitude, mcg.baidu_latitude, mci.car_flag
+        FROM mo_car_gps mcg
+                 INNER JOIN mo_car_info mci ON mci.device_id = mcg.device_id
+        WHERE mcg.device_id IS NOT NULL
+          AND baidu_latitude BETWEEN ? AND ?
+          AND baidu_longitude BETWEEN ? AND ?
+          AND mcg.baidu_latitude >= 1
+          AND mcg.baidu_longitude >= 1
+        GROUP BY mci.device_id
+        ORDER BY mcg.create_time DESC
+    </sql>
+    <sql id="findForHotMap">
+        SELECT round(baidu_longitude, 5) lng, round(baidu_latitude, 5) lat, count(*) + 100 count
+        FROM mo_car_gps
+        WHERE baidu_latitude BETWEEN ? AND ?
+          AND baidu_longitude BETWEEN ? AND ?
+          AND baidu_latitude >= 1
+          AND baidu_longitude >= 1
+        GROUP BY round(baidu_longitude, 5), round(baidu_latitude, 5)
+    </sql>
+    <sql id="findForLocus">
+        SELECT baidu_longitude lng, baidu_latitude lat
+        FROM mo_car_gps_time
+        WHERE device_id = ?
+          AND create_time BETWEEN ? AND ?
+          AND baidu_latitude >= 1
+          AND baidu_longitude >= 1
+        ORDER BY timestamp
+    </sql>
+    <sql id="carLocus.easyui.datagrid">
+        SELECT *
+               -- @where
+        FROM
+            (SELECT mci.car_no, mci.car_no_color, mci.car_flag, mci.car_model, mci.car_framework_no,
+                    count(mcg.id) count, mcg.create_date, mci.engine_discharge_value, mci.engine_power,
+                    mci.engine_model, mci.engine_gass_type, mci.device_id
+             FROM
+                 mo_car_info mci
+                     LEFT JOIN mo_car_gps mcg ON mcg.device_id = mci.device_id
+             WHERE baidu_latitude >= 1
+               AND baidu_longitude >= 1
+             GROUP BY
+                 mcg.device_id) tt
+            -- @condition
+        WHERE tt.count > 0
+    </sql>
+</sqlGroup>

@@ -1,0 +1,88 @@
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<form id="repair">
+    <div id="car" fit="true" style="overflow: hidden;">
+        <div title="车辆维修信息" style="padding: 2px; ">
+            <input type="hidden" id="repair_id" name="fixRecord.id" value="">
+            <table class="grid">
+                <tr>
+                    <td align="left" style="width: 15%;">汽车信息：</td>
+                    <td colspan="4" style="width: 20%;">
+                        <input type="hidden" id="car_id" name="fixRecord.car_id" value="">
+                        <input type="text" readonly
+                               class="txt01 easyui-validatebox" style="width: 90px;"
+                               id="car_info"/>
+                        <a id="a_add_car" class="easyui-linkbutton" plain="true"
+                           href="javascript:;"
+                           icon="icon-cart_add" title="添加车辆信息">
+                        </a>
+                    </td>
+                    <td align="left" style="width: 15%;">出现时间：</td>
+                    <td colspan="4" style="width: 20%;"><input type="text"
+                                                               name="fixRecord.breakdown_time"
+                                                               class="txt01 easyui-validatebox"
+                                                               id="breakdown_time"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td align="left">故障现象：</td>
+                    <td colspan="9"><textarea type="text" name="fixRecord.breakdown_info"
+                                              style="width: 98%;height: 60px;"
+                                              id="breakdown_info"
+                    ></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">解决方案：</td>
+                    <td colspan="9"><textarea type="text" style="width: 98%;height: 60px;"
+                                              name="fixRecord.solution"
+                                              style="width: 98%;height: 60px;"
+                                              id="solution"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">维修地点：</td>
+                    <td colspan="4">
+                        <input type="text" name="fixRecord.fix_location"
+                                  class="txt01 easyui-validatebox"
+                                  data-options="required:true,missingMessage:'请输入维修地点'"
+                                  id="fix_location"/>
+                    </td>
+
+                    <td align="left">维修时间：</td>
+                    <td colspan="4"><input type="text" name="fixRecord.fix_time"
+                                           class="txt01 easyui-validatebox"
+                                           id="fix_time"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td align="left">故障原因：</td>
+                    <td colspan="9"><textarea type="text" name="fixRecord.breakdown_reson"
+                                              style="width: 98%;height: 60px;"
+                                              id="breakdown_reson"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">维修人员：</td>
+                    <td colspan="9"><input type="text" name="fixRecord.fixer"
+                                           class="txt01 easyui-validatebox"
+                                           id="fixer"
+                                           data-options="required:true,missingMessage:'请输入维修人员'"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td align="left">备注：</td>
+                    <td colspan="9"><textarea type="text" name="fixRecord.remark"
+                                              style="width: 98%;height: 60px;"
+                                              id="remark"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

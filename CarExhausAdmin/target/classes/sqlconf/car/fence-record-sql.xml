@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="fenceRecord">
+    <sql id="easyui.datagrid">
+        SELECT mci.car_no,mf.name,mfr.`in_time`,mfr.`leavel_time`
+        -- @where
+        FROM mo_fence_record mfr
+        LEFT JOIN mo_device md ON md.id = mfr.`device_id`
+        LEFT JOIN mo_car_info mci ON mci.`device_id` = md.id
+        LEFT JOIN mo_fence mf ON mf.id = mfr.`fence_id`
+        -- @condition
+        WHERE 1 = 1
+        order by create_time desc
+    </sql>
+</sqlGroup>

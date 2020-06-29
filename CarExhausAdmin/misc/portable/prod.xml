@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright (c) 2013-2014 sagyf Yang. The Four Group.
+  -->
+
+<portable-config>
+    <config-file path="WEB-INF/classes/application.conf" type=".properties">
+        <replace key="app.mode">prod</replace>
+        <replace key="app.name">carAdminNw</replace>
+        <replace key="app.version">0.0.2</replace>
+        <replace key="app.domain">http://47.95.213.163:8080/carAdmin</replace>
+        <replace key="db.url">jdbc:mysql://172.17.97.24:3306/mo_car_sys_nw?useUnicode=true&amp;characterEncoding=utf-8</replace>
+        <replace key="db.username">car</replace>
+        <replace key="db.password">car@usr</replace>
+        <replace key="redis.host">127.0.0.1</replace>
+        <replace key="redis.port">7719</replace>
+        <replace key="mysql.backup.dir">/mnt/car_app/backup/nw/</replace>
+    </config-file>
+</portable-config>

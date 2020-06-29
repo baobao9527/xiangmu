@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="info.area">
+    <sql id="findByLevel">
+        SELECT
+            id,
+            level,
+            parent,
+            name,
+            sn
+        FROM mo_area
+        WHERE level = ?
+    </sql>
+    <sql id="findByParent">
+        SELECT
+            id,
+            level,
+            parent,
+            name,
+            sn
+        FROM mo_area
+        WHERE parent = ?
+    </sql>
+    <sql id="findBySn">
+        SELECT
+            id,
+            level,
+            parent,
+            name,
+            sn
+        FROM mo_area
+        WHERE sn like ?
+    </sql>
+    <sql id="findByParentSn">
+        SELECT
+        mc.id,
+        mc.level,
+        mc.parent,
+        mc.name,
+        mc.sn
+        FROM mo_area mc
+        LEFT JOIN mo_area mp ON mc.parent = mp.id
+        WHERE mp.sn = ?
+    </sql>
+</sqlGroup>

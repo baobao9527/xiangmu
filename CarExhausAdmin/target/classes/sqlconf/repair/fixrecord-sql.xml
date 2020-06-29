@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="fixRecord">
+    <sql id="easyui.datagrid">
+        SELECT mfr.id, mfr.car_id, mfr.breakdown_info,
+            date_format(mfr.breakdown_time, '%Y-%m-%d') breakdown_time,
+            date_format(mfr.fix_time, '%Y-%m-%d')       fix_time,
+            mfr.fix_location, mfr.fixer,
+            mfr.breakdown_reson, mfr.solution, mfr.ok_flag, mfr.remark, mfr.create_time, mci.car_no,
+            mci.car_no_color, mci.car_flag, mci.engine_gass_type
+        -- @where
+        FROM mo_fix_record mfr
+            LEFT JOIN mo_car_info mci ON mci.id = mfr.car_id
+            LEFT JOIN mo_driver md ON md.id = mci.driver_id
+        -- @condition
+        WHERE 1=1
+        ORDER BY create_time DESC
+    </sql>
+    <sql id="agent.easyui.datagrid">
+        SELECT mfr.id, mfr.car_id, mfr.breakdown_info,
+            date_format(mfr.breakdown_time, '%Y-%m-%d') breakdown_time,
+            date_format(mfr.fix_time, '%Y-%m-%d')       fix_time,
+            mfr.fix_location, mfr.fixer,
+            mfr.breakdown_reson, mfr.solution, mfr.ok_flag, mfr.remark, mfr.create_time, mci.car_no,
+            mci.car_no_color, mci.car_flag, mci.engine_gass_type
+        -- @where
+        FROM mo_fix_record mfr
+            LEFT JOIN mo_car_info mci ON mci.id = mfr.car_id
+            LEFT JOIN mo_driver md ON md.id = mci.driver_id
+        -- @condition
+        WHERE exists(select 1 from mo_car_permission mcp WHERE mcp.car_id = mfr.car_id and mcp.user_id = ?)
+        ORDER BY create_time DESC
+    </sql>
+    <sql id="normal.easyui.datagrid">
+        SELECT mfr.id, mfr.car_id, mfr.breakdown_info,
+            date_format(mfr.breakdown_time, '%Y-%m-%d') breakdown_time,
+            date_format(mfr.fix_time, '%Y-%m-%d')       fix_time,
+            mfr.fix_location, mfr.fixer,
+            mfr.breakdown_reson, mfr.solution, mfr.ok_flag, mfr.remark, mfr.create_time, mci.car_no,
+            mci.car_no_color, mci.car_flag, mci.engine_gass_type
+        -- @where
+        FROM mo_fix_record mfr
+            LEFT JOIN mo_car_info mci ON mci.id = mfr.car_id
+            LEFT JOIN mo_driver md ON md.id = mci.driver_id
+        -- @condition
+        WHERE mci.operator = ?
+        ORDER BY create_time DESC
+    </sql>
+    <sql id="delByIds">
+        DELETE FROM mo_fix_record
+    </sql>
+    <sql id="okByIds">
+        UPDATE mo_fix_record
+        SET ok_flag = 1
+    </sql>
+</sqlGroup>

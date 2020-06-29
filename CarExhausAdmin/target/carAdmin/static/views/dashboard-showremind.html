@@ -1,0 +1,26 @@
+<form id="showremindform">
+        <div title="课程信息" style="padding: 2px; ">
+            <input type="hidden" name="remind.id" value="">
+            <table class="grid">
+                <tr>
+                    <td align="left">发送人：</td>
+                    <td><input type="text" class="txt01 easyui-validatebox" id="send_user" disabled="disabled" name="remind.send_user" style="width: 300px;"/></td>
+                </tr>
+                <tr>
+                    <td align="left">接收人：</td>
+                    <td><input type="text" name="remind.receive_user" class="txt01 easyui-validatebox" disabled="disabled"
+                               id="receive_user" style="width: 300px;"></td>
+                </tr>
+                <tr>
+                    <td align="left">提醒时间：</td>
+                    <td><input type="text" name="remind.create_time" class="txt01 easyui-validatebox" disabled="disabled"
+                               id="create_time" style="width: 300px;margin-bottom: 20px;"></td>
+                </tr>
+                <tr>
+                    <td align="left">提醒内容：</td>
+                    <td><textarea name="remind.remind_content" class="txt01 easyui-validatebox" disabled="disabled"
+                               id="remind_content" style="width: 300px;height: 100px;"/></td>
+                </tr>
+            </table>
+        </div>
+</form>

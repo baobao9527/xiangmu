@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="sys.resources">
+    <sql id="findByRole">
+        SELECT
+            res.id,
+            res.name,
+            res.code,
+            res.show_name,
+            res.parent,
+            res.icon,
+            (CASE WHEN (SELECT count(1)
+                        FROM mo_role_resource mrr
+                        WHERE mrr.resource = res.id AND mrr.role_id = ?) > 0
+                THEN 1
+             ELSE 0 END) AS chk
+        FROM mo_resources res
+        WHERE res.status = ?
+        ORDER BY res.sort
+    </sql>
+
+    <sql id="findByStatus">
+        SELECT
+            res.id,
+            res.name,
+            res.code,
+            res.show_name,
+            res.path,
+            res.parent,
+            res.icon,
+            (CASE WHEN (SELECT count(1)
+                        FROM mo_resources mr
+                        WHERE mr.parent = res.id) > 0
+                THEN 1
+             ELSE 0 END) AS chk
+        FROM mo_resources res
+        WHERE res.status = ?
+        ORDER BY res.sort
+    </sql>
+
+    <sql id="findAll">
+        SELECT
+            res.id,
+            res.name,
+            res.code,
+            res.show_name,
+            res.path,
+            res.parent,
+            res.icon,
+            res.style,
+            (CASE WHEN (SELECT count(1)
+                        FROM mo_resources mr
+                        WHERE mr.parent = res.id) > 0
+                THEN 1
+             ELSE 0 END) AS chk
+        FROM mo_resources res
+        ORDER BY res.parent, res.sort
+    </sql>
+    <sql id="findByMenu">
+        SELECT
+            res.id,
+            res.name,
+            res.code,
+            res.show_name,
+            res.path,
+            res.parent,
+            res.icon,
+            (CASE WHEN (SELECT count(1)
+                        FROM mo_resources mr
+                        WHERE mr.parent = res.id) > 0
+                THEN 1
+             ELSE 0 END) AS chk
+        FROM mo_resources res
+        WHERE res.style IN (?, ?) AND res.status = ?
+        ORDER BY res.sort
+    </sql>
+
+    <sql id="findByParent">
+        SELECT
+            res.id,
+            res.name,
+            res.code,
+            res.show_name,
+            res.path,
+            res.parent,
+            res.icon AS iconCls,
+            res.style,
+            res.status,
+            res.sort
+        FROM mo_resources res
+        WHERE res.parent = ?
+        ORDER BY res.sort
+    </sql>
+
+    <sql id="findMenuByRole">
+        SELECT
+            res.id,
+            res.name,
+            res.code,
+            res.show_name,
+            res.path,
+            res.parent,
+            res.icon,
+            (CASE WHEN (SELECT count(1)
+                        FROM mo_resources mr
+                        WHERE mr.parent = res.id) > 0
+                THEN 1
+             ELSE 0 END) AS chk
+        FROM mo_resources res
+        WHERE EXISTS(SELECT id
+                     FROM mo_role_resource mrr
+                     WHERE mrr.role_id = ? AND mrr.resource = res.id) AND res.status = ? AND
+              (style = ? OR style = ?)
+        ORDER BY res.sort
+    </sql>
+
+    <sql id="deleteByRole">
+        DELETE FROM mo_role_resource
+        WHERE role_id = ?
+    </sql>
+    <sql id="findGroup">
+        SELECT
+            id,
+            name,
+            style
+        FROM mo_resources
+        WHERE (style = ? OR style = ?) AND status = ?
+        ORDER BY sort
+    </sql>
+
+
+    <sql id="findByUserId">
+        SELECT res.id
+        FROM mo_resources res
+        WHERE exists(SELECT id
+                     FROM mo_role_resource mrr
+                     WHERE mrr.role_id = (SELECT role_id
+                                          FROM mo_user mu
+                                          WHERE mu.id = ?) AND mrr.resource = res.id)
+              AND status = ?
+        ORDER BY res.sort
+    </sql>
+
+    <sql id="setRoleResources">
+        INSERT INTO mo_role_resource (role_id, resource) VALUES (?, ?)
+    </sql>
+
+    <sql id="findByRoleId">
+        SELECT res.id
+        FROM mo_resources res
+            LEFT JOIN mo_role_resource mrr ON mrr.resource = res.id
+        WHERE mrr.role_id = ?
+        ORDER BY res.sort
+    </sql>
+    <sql id="findByUser">
+        SELECT
+            mr.*,
+            (CASE WHEN (SELECT count(1)
+                        FROM mo_resources mrc
+                        WHERE mrc.parent = mr.id) > 0
+                THEN 1
+             ELSE 0 END) AS chk
+        FROM mo_resources mr
+        WHERE EXISTS(SELECT mrr.resource
+                     FROM mo_role_resource mrr
+                     WHERE exists(SELECT mur.user_id
+                                  FROM mo_user_role mur
+                                  WHERE mur.user_id = ? AND mur.role_id = mrr.role_id) AND
+                           mrr.resource = mr.id)
+            and mr.status = ?
+        ORDER BY mr.parent, mr.sort
+    </sql>
+
+    <sql id="deleteResourceId">
+        DELETE FROM mo_role_resource
+        WHERE role_id = ?
+    </sql>
+
+
+    <sql id="resourceIdByRoleId">
+
+        SELECT *
+        FROM mo_resources mr
+        WHERE exists(SELECT resource
+                     FROM mo_role_resource
+                     WHERE role_id = ?) AND status = ?
+    </sql>
+
+</sqlGroup>

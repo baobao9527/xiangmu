@@ -1,0 +1,113 @@
+/*
+ * Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+ */
+
+body{
+	font-family:'microsoft yahei', Arial, Verdana, sans-serif;
+	background-color: #020304;
+}
+/******************************************************************************
+  Login Page
+*******************************************************************************/
+.login_main{
+	/*background: url(img/bg_login.jpg) no-repeat center center;*/
+	font: 14px/20px 'microsoft yahei', Arial, Verdana, sans-serif;
+	min-height: 760px;
+	/*zoom: 1.15;*/
+}
+.login_main .container_12{ padding-top: 200px; }
+.new_customers{
+	margin-left: 0;
+	/*margin-top: 23px;*/
+}
+.new_customers p{
+	margin-bottom: 30px!important;
+}
+.new_customers button.account{
+	font: bold 13px/40px 'microsoft yahei', Arial, Verdana, sans-serif;
+	width: 174px;
+}
+.registed_form{
+	margin-right: 0;
+}
+form.registed{
+	border-radius: 10px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	margin: 0;
+	padding: 30px;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+	background: url(img/bg_form.jpg) repeat-x bottom;
+	background-color: #fefefe;
+}
+form.registed h2{
+	font: bold 16px/20px 'microsoft yahei', Arial, Verdana, sans-serif;
+	margin-bottom: 15px;
+}
+form.registed strong{
+	color: #707070;
+	font: bold 13px/13px 'microsoft yahei', Arial, Verdana, sans-serif;
+}
+form.registed label{ display: block; font-size: 14px; color: #666; }
+form.registed sup{
+	color: #eb6447;
+	margin: 0 3px;
+}
+form.registed input[type="text"],
+form.registed input[type="password"],
+form.registed input[type="email"]{
+	margin: 5px 0 13px 0;
+	width: 220px;
+	font: 14px/20px 'microsoft yahei', Arial, Verdana, sans-serif;
+}
+
+form.registed .valid input[type="text"]{
+	width: 130px;
+}
+form.registed .valid img{ margin: 8px 0 11px 5px; display: inline-block; vertical-align: middle; }
+form.registed .rem{
+	color: #777;
+	vertical-align:top;
+	font:normal 12px/17px 'microsoft yahei', Arial, Verdana, sans-serif;
+	display: inline-block;
+	margin-top: 10px;
+}
+form.registed .submit {
+	color: #eb6447;
+	font:normal 14px/38px 'microsoft yahei', Arial, Verdana, sans-serif;
+	height: 38px;
+	margin: 20px 0 0 0;
+}
+.submit input[type="submit"]{
+	float: right;
+	font: 14px/40px 'microsoft yahei', Arial, Verdana, sans-serif;
+	margin:0 15px 0 0;
+	width: 78px;
+	background-color: #4088ed;
+	width: 100px;
+}
+.submit input[type="submit"].disabled{
+	background-color: #ddd;
+	border: 1px solid #ddd;
+}
+.submit input[type="submit"]:hover{
+	background-color: #247aca;
+	border: 1px solid #247aca;
+}
+.submit .btn_reg{
+	float: left;
+	font: 13px/40px 'microsoft yahei', Arial, Verdana, sans-serif;
+	margin:0 15px 0 0;
+	width: 78px;
+	background-color: #f6f6f6;
+	border: 1px solid #d7d7d7;
+	color: #333;
+}
+form.registed a.forgot{
+	color: #7698c1;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0 15px 0 0;
+	float: right;
+}
+

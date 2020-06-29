@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="sys.dict">
+    <sql id="findByCategory">
+        SELECT
+            id,
+            code,
+            name,
+            parent
+        FROM mo_dict
+        WHERE parent = (SELECT id
+                        FROM mo_dict
+                        WHERE code = ?)
+        AND enabled = 1
+        ORDER BY order_code
+    </sql>
+    <sql id="findByCategoryAndCode">
+        SELECT
+            id,
+            code,
+            name,
+            parent
+        FROM mo_dict
+        WHERE parent = (SELECT id
+                        FROM mo_dict
+                        WHERE code = ?)
+        AND enabled = 1 and code = ?
+        ORDER BY order_code
+    </sql>
+    <sql id="findAll">
+        SELECT
+            id,
+            code,
+            name,
+            parent
+        FROM mo_dict
+        WHERE enabled = 1
+        ORDER BY parent,order_code
+    </sql>
+
+    <sql id="easyui.datagrid">
+        select
+              id,
+              code,
+              name,
+              description,
+              enabled,
+              order_code,
+              parent
+        -- @where
+        from
+             mo_dict
+        -- @condition
+        WHERE parent = ? order by order_code
+    </sql>
+    <sql id="findparent">
+        select
+        id,
+        code,
+        name,
+        description,
+        enabled,
+        order_code,
+        parent
+        from
+        mo_dict
+        WHERE parent = 0 AND enabled = 1
+    </sql>
+    <sql id="findbyparent">
+        select
+        id,
+        code,
+        name,
+        description,
+        enabled,
+        order_code,
+        parent
+        from
+        mo_dict
+        WHERE parent = ? AND enabled = 1
+    </sql>
+
+  <sql id="findByParentCode">
+    select
+      *
+    from
+      mo_dict
+    where parent=(SELECT id from mo_dict where code=?) AND enabled = 1
+  </sql>
+
+    <!--按照名族的code，查找名族的名字-->
+    <sql id="findnationbycode">
+        select
+          name
+        from
+          mo_dict
+        where
+          parent=(select id from mo_dict where code='national') and code=? AND enabled = 1
+    </sql>
+
+    <!--显示所有的员工状态信息-->
+    <sql id="showallempstatus">
+        select
+          code,
+          name
+        from
+          mo_dict
+        where
+         parent= (select id from mo_dict where code='empstatus') AND enabled = 1
+    </sql>
+
+    <!--显示所有的员工类型信息-->
+    <sql id="showallemptype">
+        select
+          code,
+          name
+        from
+          mo_dict
+        where
+         parent= (select id from mo_dict where code='emptype') AND enabled = 1
+    </sql>
+
+
+</sqlGroup>

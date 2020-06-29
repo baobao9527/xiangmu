@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="supplier">
+    <sql id="admin.easyui.datagrid">
+        select msc.id, ms.code, ms.name,  ms.create_time, mu.name as createName, msc.car_no
+        -- @where
+        from
+            mo_supplier ms inner join mo_user mu on mu.id = ms.creater
+            inner join mo_supplier_car msc on msc.supplier_id = ms.id
+        -- @condition
+        WHERE ms.delete_flag = 0
+        order by ms.create_time
+    </sql>
+    <sql id="user.easyui.datagrid">
+        select msc.id, ms.code, ms.name,  ms.create_time, mu.name as createName, msc.car_no
+        -- @where
+        from
+            mo_supplier ms inner join mo_user mu on mu.id = ms.creater
+            inner join mo_supplier_car msc on msc.supplier_id = ms.id
+        -- @condition
+        WHERE ms.delete_flag = 0 AND ms.creater = ?
+        order by ms.create_time
+    </sql>
+
+    <sql id="checkcarno">
+        select ms.id
+        from mo_supplier ms inner join mo_supplier_car msc ON msc.supplier_id = ms.id
+        where msc.car_no = ? and ms.name = ? and ms.delete_flag = 0
+    </sql>
+    <sql id="selectByName">
+        select ms.id, ms.name
+        from mo_supplier ms
+        where ms.name = ? and ms.delete_flag = 0
+    </sql>
+    <sql id="countBySpplierId">
+        select count(1) as cnt
+        from mo_supplier_car
+        where supplier_id = ? and delete_flag = 0
+    </sql>
+    <sql id="findByNameAndCarNo">
+        select ms.id, ms.name
+        from mo_supplier ms inner join mo_supplier_car msc ON msc.supplier_id = ms.id
+        where ms.name = ? and msc.car_no = ? and ms.delete_flag = 0
+    </sql>
+    <sql id="findByCarNo">
+        select ms.id, ms.name
+        from mo_supplier ms inner join mo_supplier_car msc ON msc.supplier_id = ms.id
+        where msc.car_no = ? and ms.delete_flag = 0
+    </sql>
+    <sql id="car.deleteBySupplier">
+        delete from mo_supplier_car
+        where supplier_id = ?
+    </sql>
+</sqlGroup>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="fence">
+    <sql id="easyui.datagrid">
+        SELECT mf.*
+        -- @where
+        FROM mo_fence mf
+        -- @condition
+        WHERE 1 = 1
+        ORDER BY create_time DESC
+    </sql>
+    <sql id="rolelist.easyui.datagrid">
+        SELECT mf.*
+        -- @where
+        FROM mo_fence mf
+        -- @condition
+        WHERE 1 = 1 AND user_id = ?
+        ORDER BY create_time DESC
+    </sql>
+    <sql id="deleteByIds">
+        DELETE FROM mo_fence
+        WHERE 1 = 1
+    </sql>
+    <sql id="findAll">
+        SELECT *
+        FROM mo_fence
+    </sql>
+</sqlGroup>

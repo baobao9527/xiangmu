@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="deviceStatus">
+
+    <sql id="easyui.datagrid">
+        SELECT
+        mci.`car_no`,
+        mds.`car_status`,
+        mds.`exhaust_status`,
+        md.`name`
+        -- @where
+        FROM mo_device_status mds INNER JOIN mo_car_info mci ON mci.device_id = mds.device_id
+        INNER JOIN mo_driver md ON md.id = mci.driver_id
+        -- @condition
+        WHERE 1=1
+        ORDER BY mds.`report_time` desc
+    </sql>
+
+</sqlGroup>

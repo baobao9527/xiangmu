@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="sys.user">
+
+    <sql id="findByName">
+        SELECT id, name, password, salt, default_flag, birthday, create_time, username, wxchat, qq,
+            role_id, super_admin, type
+        FROM mo_user
+        WHERE name = ?
+    </sql>
+
+    <sql id="findInfoWithUserId">
+        SELECT mu.id, mu.username, mu.name, mu.create_time, mu.last_login_time, mu.first_login_time,
+            mu.phone, mu.type, mu.super_admin,
+            (select group_concat(mr.name,',') from mo_user_role mur INNER JOIN mo_role mr On mr.id = mur.role_id Where mur.user_id = ?) as roleName
+        FROM mo_user mu
+            LEFT JOIN mo_role mr ON mr.id = mu.role_id
+        WHERE mu.id = ?
+    </sql>
+
+    <sql id="easyui.datagrid">
+
+        SELECT mu.id       id, mu.name name, mu.phone phone, mu.username username,
+               mu.birthday birthday, mu.gender gender,  mu.create_time, type
+        -- @where
+        FROM mo_user mu
+        -- @condition
+        WHERE mu.name != 'admin'
+
+    </sql>
+    <sql id="agents.easyui.datagrid">
+
+        SELECT mu.id       id, mu.name name, mu.phone phone, mu.username username,
+               mu.birthday birthday, mu.gender gender,  mu.create_time, type
+        -- @where
+        FROM mo_user mu
+        -- @condition
+        WHERE mu.type = ?
+    </sql>
+
+
+
+    <sql id="findByUserName">
+        SELECT id
+        FROM mo_user
+        WHERE username = ?
+    </sql>
+
+</sqlGroup>

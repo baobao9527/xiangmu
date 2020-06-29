@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<form id="noticeform">
+    <input type="hidden" name="notice.id" value="">
+    <table class="grid">
+        <tr>
+            <td align="left">标题</td>
+            <td><input type="text" name="notice.title" class="txt01 easyui-validatebox"
+                       style="width:400px;"
+                       id="title"
+                       data-options="required:true,validType:['string','length[0,100]']"/></td>
+        </tr>
+
+        <tr>
+            <td align="left">概要</td>
+            <td>
+               <textarea name="notice.summary" id="summary"
+                                  class="txt01 easyui-validatebox"
+                                  data-options="required:true,validType:['string','length[0,250]']"
+                                  style="width: 400px;height: 50px;"></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="left">内容</td>
+            <td>
+               <textarea name="notice.content" id="content"
+                                  class="txt01 easyui-validatebox"
+                                  data-options="required:true,validType:'minLength[1]'"
+                                  style="width: 400px;height: 150px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">显示排序</td>
+            <td><input id="order_no" name="notice.order_no" class="easyui-numberspinner"
+                       style="width:80px;"
+                       required="required" value="1"
+                       data-options="min:1,max:100,editable:false,invalidMessage:'请选择合适的排序号'"></td>
+        </tr>
+
+    </table>
+</form>

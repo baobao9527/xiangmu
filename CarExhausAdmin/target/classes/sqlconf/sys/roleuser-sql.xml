@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlGroup name="roleuser">
+
+
+  <!--给角色用户批量插入数据-->
+  <sql id="insertroleuser">
+    insert into mo_user_role (role_id,user_id) values(?,?)
+  </sql>
+
+  <sql id="deleteByRole">
+    DELETE from mo_user_role where role_id = ?
+  </sql>
+
+  <!--根据角色的id与用户的id，删除该用户角色表-->
+  <sql id="deleteroleuserbyid">
+    delete from mo_user_role where role_id=? and user_id=?
+  </sql>
+
+  <!--根据用户的id获得除要删除的角色的id外的所有角色的id-->
+  <sql id="mergroleidbyuid">
+    select role_id from mo_user_role where user_id=? and role_id!=?
+  </sql>
+  <sql id="findRoleNameByUserId">
+    SELECT r.code FROM mo_user_role ur
+    LEFT JOIN mo_role r ON r.id = ur.role_id WHERE ur.user_id = ?
+  </sql>
+  <sql id="findByCode">
+    SELECT ur.user_id FROM mo_user_role ur
+    LEFT JOIN mo_role r ON r.id = ur.role_id WHERE r.code = ?
+  </sql>
+</sqlGroup>

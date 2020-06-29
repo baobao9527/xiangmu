@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="device.authbatch">
+    <sql id="easyui.datagrid">
+        SELECT mdb.id, mdb.devices, mdb.code, mdb.operator, mdb.dateline, mdb.status,
+            mu.name AS operator_name
+        -- @where
+        FROM mo_device_auth_batch mdb INNER JOIN mo_user mu ON mu.id = mdb.operator
+        WHERE operator = ? AND mdb.status != ?
+        ORDER BY dateline DESC
+    </sql>
+    <sql id="admin.easyui.datagrid">
+        SELECT mdb.id, mdb.devices, mdb.code, mdb.operator, mdb.dateline, mdb.status,
+            mu.name AS operator_name
+        -- @where
+        FROM mo_device_auth_batch mdb INNER JOIN mo_user mu ON mu.id = mdb.operator
+        WHERE mdb.status != ?
+        ORDER BY dateline DESC
+    </sql>
+
+    <sql id="findInfoByUser">
+        SELECT mdb.id, mdb.devices, mdb.code, mdb.operator, mdb.dateline, mdb.status,
+            mu.name AS operator_name
+        FROM mo_device_auth_batch mdb INNER JOIN mo_user mu ON mu.id = mdb.operator
+        WHERE mdb.id = ?
+    </sql>
+</sqlGroup>

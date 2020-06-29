@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="deviceData">
+    <sql id="easyui.datagrid">
+        SELECT mdd.id, mci.car_no, mci.terminal, mci.car_no_color, mci.car_flag, mci.car_model,
+            mci.car_framework_no, mdd.device_id, mdd.urea_temperature, mdd.urea_position,
+            mdd.temperature_1, mdd.temperature_2, mdd.temperature_3, mdd.temperature_4,
+            mdd.report_time, mdd.pressure, mdd.obd, mdd.`after_km`, mdd.speed, mdd.flag_mileage,
+            mdd.flag_speed, mdd.`dpf_before_temperature`, mdd.`dpf_arter_temperature`,
+            mdd.temperature_1_flag, mdd.urea_temperature_flag, mdd.urea_position_flag,
+            mdd.temperature_2_flag, mdd.temperature_3_flag, mdd.temperature_4_flag,
+            mdd.pressure_flag, mdd.pm_value, mdd.no_value, mdd.pm_value_flag, mdd.no_value_flag,
+            mcg.baidu_latitude, mcg.baidu_longitude, mdd.code errorcode, divi.device_code ,
+            (SELECT if(car_status IS NULL, 0, car_status) status
+             FROM mo_device_status mds
+             WHERE mds.device_id = mdd.device_id) status
+        -- @where
+        FROM mo_device_data mdd inner join mo_device divi ON divi.id = mdd.device_id
+            LEFT JOIN mo_car_info mci ON mci.device_id = mdd.device_id
+            LEFT JOIN mo_car_gps mcg ON mcg.id = mdd.gps_id and mcg.baidu_latitude >= 1 AND mcg.baidu_longitude >= 1
+            LEFT JOIN mo_driver md ON md.id = mci.driver_id
+        -- @condition
+        WHERE  mci.id IS NOT NULL
+    </sql>
+    <sql id="findByCarAndCurrent">
+        SELECT mdd.`id`, mdd.`device_id`, mdd.`fwh_version`, mdd.`software_version`, mdd.`obd`,
+            mdd.`after_km`, mdd.`speed`, mdd.`engine_speed`, mdd.`torque`, mdd.`nox`, mdd.`curon`,
+            mdd.`engine_load`, mdd.`dpf_before_temperature`, mdd.`dpf_arter_temperature`,
+            mdd.`urea_temperature`, mdd.`urea_position`, mdd.`temperature_1`, mdd.`temperature_2`,
+            mdd.`temperature_3`, mdd.`temperature_4`, mdd.`pressure`, mdd.`report_time`,
+            mdd.`flag_mileage`, mdd.`flag_speed`, mdd.`temperature_1_flag`,
+            mdd.`urea_temperature_flag`, mdd.`urea_position_flag`, mdd.`temperature_2_flag`,
+            mdd.`temperature_3_flag`, mdd.`temperature_4_flag`, mdd.`pressure_flag`, mci.car_no,
+            md.name car_color_name, mcg.baidu_latitude, mcg.baidu_longitude, mdd.code errorcode, divi.device_code ,
+            (SELECT if(car_status IS NULL, 0,
+                       car_status) status
+             FROM mo_device_status mds
+             WHERE mds.device_id = mdd.device_id) status
+        FROM mo_device_data mdd inner join mo_device divi ON divi.id = mdd.device_id
+            LEFT JOIN mo_car_info mci ON mci.device_id = mdd.device_id
+            LEFT JOIN mo_dict md ON mci.car_no_color = md.code AND md.parent = 21
+            LEFT JOIN mo_car_gps mcg ON mcg.id = mdd.gps_id and mcg.baidu_latitude >= 1 AND mcg.baidu_longitude >= 1
+        WHERE mci.id = ?
+        LIMIT 1
+    </sql>
+    <sql id="findByDeviceSn">
+        SELECT dd.*
+        FROM mo_device_data dd INNER JOIN mo_device d ON d.id = dd.device_id
+        WHERE d.device_code = ?
+        ORDER BY dd.report_time DESC
+        LIMIT 1
+    </sql>
+    <sql id="findByDeviceId">
+        SELECT dd.*
+        FROM mo_device_data dd
+        WHERE dd.device_id = ?
+        ORDER BY dd.report_time DESC
+        LIMIT 1
+    </sql>
+    <sql id="findByIdMore">
+        SELECT mdd.id, mci.car_no, mci.terminal, mci.car_no_color, mci.car_flag, mci.car_model,
+            mci.car_framework_no, mdd.device_id, mdd.urea_temperature, mdd.urea_position,
+            mdd.temperature_1, mdd.temperature_2, mdd.temperature_3, mdd.temperature_4,
+            mdd.report_time, mdd.pressure, mdd.obd, mdd.speed, mdd.flag_mileage, mdd.flag_speed,
+            mdd.`dpf_before_temperature`, mdd.`dpf_arter_temperature`, mdd.temperature_1_flag,
+            mdd.urea_temperature_flag, mdd.urea_position_flag, mdd.temperature_2_flag,
+            mdd.temperature_3_flag, mdd.temperature_4_flag, mdd.pressure_flag, mdd.pm_value,
+            mdd.no_value, mdd.pm_value_flag, mdd.no_value_flag, mcg.baidu_latitude,
+            mcg.baidu_longitude, mdd.code errorcode, divi.device_code ,
+            (SELECT if(car_status IS NULL, 0, car_status) status
+             FROM mo_device_status mds
+             WHERE mds.device_id = mdd.device_id) status
+        -- @where
+        FROM mo_device_data mdd  inner join mo_device divi ON divi.id = mdd.device_id
+            LEFT JOIN mo_car_info mci ON mci.device_id = mdd.device_id
+            LEFT JOIN mo_car_gps mcg ON mcg.id = mdd.gps_id and mcg.baidu_latitude >= 1 AND mcg.baidu_longitude >= 1
+            LEFT JOIN mo_driver md ON md.id = mci.driver_id
+        -- @condition
+        WHERE mdd.id = ?
+        LIMIT 1
+    </sql>
+</sqlGroup>

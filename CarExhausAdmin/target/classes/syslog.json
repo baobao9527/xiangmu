@@ -1,0 +1,302 @@
+[
+  {
+    "path": "/sys/dict/list",
+    "title": "查看字典",
+    "params": {
+    }
+  },
+  {
+    "path": "/sys/dict/save",
+    "title": "新增或删除字典{dict.id}",
+    "params": {
+      "dict.id": "dict.id"
+    }
+  },
+  {
+    "path": "/sys/dict/del",
+    "title": "删除字典{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/dict/audit",
+    "title": "启用禁用字典{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/oprlog/list",
+    "title": "查看操作日志",
+    "params": {
+    }
+  },
+  {
+    "path": "/sys/org/trees",
+    "title": "查看组织机构",
+    "params": {
+    }
+  },
+  {
+    "path": "/sys/org/save",
+    "title": "新增或修改组织机构{org.id}",
+    "params": {
+      "org.id": "org.id"
+    }
+  },
+  {
+    "path": "/sys/org/del",
+    "title": "删除组织机构{id}",
+    "params": {
+      "id": "id"
+    }
+  },
+  {
+    "path": "/sys/resource/save",
+    "title": "新增或修改资源列表{resource.id}",
+    "params": {
+      "resource.id": "resource.id"
+    }
+  },
+  {
+    "path": "/sys/resource/del",
+    "title": "删除资源列表{id}",
+    "params": {
+      "id": "id"
+    }
+  },
+  {
+    "path": "/sys/org/del",
+    "title": "删除组织机构{id}",
+    "params": {
+      "id": "id"
+    }
+  },
+  {
+    "path": "/sys/role/save",
+    "title": "新增或修改角色{role.id}",
+    "params": {
+      "role.id": "role.id"
+    }
+  },
+  {
+    "path": "/sys/role/del",
+    "title": "删除角色{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/role/permissionSave",
+    "title": "角色{roleId}用户设置{id[]}",
+    "params": {
+      "roleId": "roleId",
+      "id[]": "ids"
+    }
+  },
+  {
+    "path": "/sys/role/rolePermissionSave",
+    "title": "角色{roleid}资源权限设置{permissions}",
+    "params": {
+      "roleid": "roleid",
+      "permissions": "permissions"
+    }
+  },
+  {
+    "path": "/sys/skill/save",
+    "title": "新增或修改专业技能{skill.id}",
+    "params": {
+      "skill.id": "skill.id"
+    }
+  },
+  {
+    "path": "/sys/skill/del",
+    "title": "删除专业技能{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/skill/status",
+    "title": "启用/禁用专业技能{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/smstpl/save",
+    "title": "新增或修改短信模板{smstpl.id}",
+    "params": {
+      "smstpl.id": "smstpl.id"
+    }
+  },
+  {
+    "path": "/sys/smstpl/del",
+    "title": "删除短信模板{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/smstpl/enable",
+    "title": "启用短信模板{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/smstpl/disable",
+    "title": "禁用短信模板{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/user/save",
+    "title": "新增或修改用户{user.id}",
+    "params": {
+      "user.id": "user.id"
+    }
+  },
+  {
+    "path": "/sys/user/del",
+    "title": "删除用户{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/user/updatepass",
+    "title": "用户{user.id}重置密码",
+    "params": {
+      "user.id": "user.id"
+    }
+  },
+  {
+    "path": "/training/check/save",
+    "title": "新增或修改培训考核{check.id}",
+    "params": {
+      "check.id": "check.id"
+    }
+  },
+  {
+    "path": "/training/check/del",
+    "title": "删除培训考核{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/training/course/save",
+    "title": "新增或修改课程{course.id}",
+    "params": {
+      "course.id": "course.id"
+    }
+  },
+  {
+    "path": "/training/course/del",
+    "title": "删除课程{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/training/plan/save",
+    "title": "新增或修改培训计划{plan.id}",
+    "params": {
+      "plan.id": "plan.id"
+    }
+  },
+  {
+    "path": "/training/plan/del",
+    "title": "删除培训计划{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/training/teacher/save",
+    "title": "新增或修改师资{teacher.id}",
+    "params": {
+      "teacher.id": "teacher.id"
+    }
+  },
+  {
+    "path": "/training/teacher/del",
+    "title": "删除师资{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/training/type/save",
+    "title": "新增或修改培训类别{type.id}",
+    "params": {
+      "type.id": "type.id"
+    }
+  },
+  {
+    "path": "/training/type/del",
+    "title": "删除培训类别{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/info/notice/save",
+    "title": "新增或修改公告{notice.id}",
+    "params": {
+      "notice.id": "notice.id"
+    }
+  },
+  {
+    "path": "/info/notice/del",
+    "title": "删除公告{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/info/notice/publish",
+    "title": "发布公告{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/sys/user/save",
+    "title": "创建或者编辑用户{user.id}",
+    "params": {
+      "user.id": "user.id"
+    }
+  },
+  {
+    "path": "/sys/user/del",
+    "title": "删除用户{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  },
+  {
+    "path": "/info/notice/publish",
+    "title": "发布公告{id[]}",
+    "params": {
+      "d[]": "d[]"
+    }
+  },
+  {
+    "path": "/sys/user/save",
+    "title": "创建或者编辑用户{user.id}",
+    "params": {
+      "user.id": "user.id"
+    }
+  },
+  {
+    "path": "/sys/user/del",
+    "title": "删除用户{id[]}",
+    "params": {
+      "id[]": "id[]"
+    }
+  }
+]

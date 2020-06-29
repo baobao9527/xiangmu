@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="sys.role">
+
+
+    <sql id="easyui.datagrid">
+        select
+          mr.id,
+          mr.code,
+          mr.name,
+          mr.status,
+          mr.description,
+          mu1.username create_user
+        -- @where
+        from
+          mo_role mr left join mo_user mu1 on mr.create_user=mu1.id
+    </sql>
+
+
+    <!--获得所有用户的信息-->
+    <sql id="findallusers.easyui.datagrid">
+        select
+            mu.id,
+            mu.name,
+            mu.username
+        -- @where
+        from
+            mo_user mu
+
+    </sql>
+
+    <!--获得所有属于该角色的用户信息-->
+    <sql id="findusersbyroleid.easyui.datagrid">
+        select
+            mu.id,
+            mu.name,
+            mu.username
+        -- @where
+        from
+            mo_user mu
+        where  exists (select user_id from mo_user_role where role_id = ? and mu.id = user_id)
+
+    </sql>
+
+    <!--获得所有启用的角色信息-->
+    <sql id="enablerole.easyui.datagrid">
+       select
+           id,
+           code,
+           name
+        -- @where
+        from
+           mo_role
+        where
+           status=1
+    </sql>
+
+    <sql id="permission">
+        INSERT INTO mo_role_resource (role_id, resource) VALUES (?, ?)
+    </sql>
+
+
+    <sql id="findByUsername">
+        SELECT *
+        FROM mo_role r
+            LEFT JOIN mo_user_role ur ON ur.role_id = r.id
+            LEFT JOIN mo_user u ON u.id = ur.user_id
+        WHERE u.name = ?
+    </sql>
+
+    <sql id="private.easyui.datagrid">
+        SELECT
+            id,
+            code,
+            name,
+            create_time,
+            description,
+            user_ids,
+            create_user,
+            status
+        -- @where
+        FROM mo_role
+    </sql>
+
+    <sql id="public.easyui.datagrid">
+        SELECT
+            id,
+            code,
+            name,
+            create_time,
+            description,
+            user_ids,
+            create_user,
+            status,
+            code
+        -- @where
+        FROM mo_role
+
+    </sql>
+
+
+
+    <sql id="allUsersByRole.easyui.datagrid">
+        SELECT
+            mu.id,
+            mu.name,
+            mu.username,
+            mu.role_id,
+            mu.status
+        -- @where
+        FROM mo_user mu
+        -- @condition
+        WHERE exists(SELECT id
+                     FROM mo_user_role mur
+                     WHERE mur.role_id = ? AND mur.user_id = mu.id)
+
+    </sql>
+
+
+    <sql id="deleteUserRfByRoleId">
+        DELETE FROM mo_user_role
+        WHERE role_id = ?
+    </sql>
+
+    <sql id="insertUserRole">
+        INSERT INTO mo_user_role (role_id, user_id) VALUES (?, ?)
+    </sql>
+
+    <sql id="updateUserRole">
+        UPDATE mo_user mu
+        SET mu.role_id = ?
+        WHERE mu.id = ?
+    </sql>
+
+
+    <!--获得所有拥有该角色的用户的id-->
+    <sql id="findusersidbyroleid">
+        select
+          id
+        from
+          mo_user
+        where
+          role_id=?
+    </sql>
+
+    <!--根据角色的id，获得该角色的所有用户-->
+    <sql id="userlistbyroleid">
+        select user_id from mo_user_role where role_id=?
+    </sql>
+
+    <sql id="resourcePermiss">
+        INSERT INTO mo_role_resource (role_id, resource) VALUES (?,?)
+    </sql>
+
+</sqlGroup>

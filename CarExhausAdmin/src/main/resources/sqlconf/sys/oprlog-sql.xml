@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="sys.oprlog">
+
+    <sql id="easyui.datagrid">
+        SELECT mu.id AS user_id, msl.id AS lo_id, mu.name, msl.create_time, msl.opr_type,
+            msl.opr_content, msl.login_ip
+        -- @where
+        FROM mo_user mu INNER JOIN mo_security_log msl ON mu.id = msl.user
+        -- @condition
+        WHERE mu.id = ?
+
+
+    </sql>
+
+</sqlGroup>

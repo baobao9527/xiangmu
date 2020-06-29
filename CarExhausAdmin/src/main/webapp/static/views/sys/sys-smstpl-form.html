@@ -1,0 +1,33 @@
+<form id="uiform">
+    <div id="staffTab" fit="true" style="height: 380px; overflow: hidden;">
+        <div title="基本信息" style="padding: 2px; ">
+           <input type="hidden" name="smstpl.id" value="">
+            <table class="grid">
+                <tr>
+                    <td align="left">模板类型：</td>
+                    <td>
+                        <input name="smstpl.type" class="txt01 easyui-combobox"
+                                      id="type" data-options="required:true,missingMessage:'请选择模板类型'">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">模板内容：</td>
+                    <td>
+                        <textarea style="height: 200px;width: 450px;font-size: 15px" class="txt09" name="smstpl.content"  id="smsContent"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-left: 100px;">
+                <a href="javascript:void(0)" data-type="var_txt" data-txt="[陪审员姓名]">[ 陪审员姓名 ]</a>
+                <a data-type="var_txt" data-txt="[案件名称]"  href="javascript:void(0)"> [ 案件名称 ]</a>
+                <a data-type="var_txt" data-txt="[开庭时间]"  href="javascript:void(0)"> [ 开庭时间 ] </a>
+            </div>
+            <div>
+                <span id="validate_warning" style="color: red; font-size: 15px; font-weight: bold"></span>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+

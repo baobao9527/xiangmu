@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="device">
+
+    <sql id="easyui.datagrid">
+        SELECT md.id, batch_id, device_code, auth_code, device_model, md.operator, md.dateline,
+            md.status, mu.name AS username, dab.code
+        -- @where
+        FROM mo_device md INNER JOIN mo_user mu ON mu.id = md.operator
+            LEFT JOIN mo_device_auth_batch dab ON dab.id = batch_id
+        -- @condition
+        WHERE md.operator = ? AND md.status != ?
+    </sql>
+    <sql id="bind.easyui.datagrid">
+        SELECT md.id, batch_id, device_code, auth_code, device_model, md.operator, md.dateline,
+            md.status, mu.name AS username, dab.code
+        -- @where
+        FROM mo_device md INNER JOIN mo_user mu ON mu.id = md.operator
+            LEFT JOIN mo_device_auth_batch dab ON dab.id = batch_id
+        -- @condition
+        WHERE md.operator = ? AND md.status != ? AND NOT exists(SELECT 1
+                                                                FROM mo_car_info mci
+                                                                WHERE mci.device_id = md.id)
+    </sql>
+    <sql id="admin.easyui.datagrid">
+        SELECT md.id, batch_id, device_code, auth_code, device_model, md.operator, md.dateline,
+            md.status, mu.name AS username, dab.code
+        -- @where
+        FROM mo_device md INNER JOIN mo_user mu ON mu.id = md.operator
+            LEFT JOIN mo_device_auth_batch dab ON dab.id = batch_id
+        -- @condition
+        WHERE md.status != ?
+    </sql>
+    <sql id="bind.admin.easyui.datagrid">
+        SELECT md.id, batch_id, device_code, auth_code, device_model, md.operator, md.dateline,
+            md.status, mu.name AS username, dab.code
+        -- @where
+        FROM mo_device md INNER JOIN mo_user mu ON mu.id = md.operator
+            LEFT JOIN mo_device_auth_batch dab ON dab.id = batch_id
+        -- @condition
+        WHERE md.status != ? AND NOT exists(SELECT 1
+                                            FROM mo_car_info mci
+                                            WHERE mci.device_id = md.id)
+    </sql>
+
+
+    <sql id="warningSql.easyui.datagrid">
+        SELECT t.id, t.device_id, t.category, t.content, t.warning_time, t.history_data_id
+        -- @where
+        FROM mo_device_warning t
+    </sql>
+
+    <sql id="generateByAuth">
+        INSERT INTO mo_device (batch_id, device_code, auth_code, device_model, operator, dateline,
+                               status)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    </sql>
+    <sql id="auth.easyui.datagrid">
+        SELECT md.id, batch_id, device_code, auth_code, device_model, operator, dateline, md.status,
+            mu.name AS username
+        -- @where
+        FROM mo_device md INNER JOIN mo_user mu ON mu.id = md.operator
+        WHERE batch_id = ?
+        ORDER BY dateline DESC
+    </sql>
+
+    <sql id="countByError">
+        SELECT count(*) AS errorCount
+        FROM mo_device_warning t
+    </sql>
+
+    <sql id="findByBatchId">
+        SELECT md.id, batch_id, device_code, auth_code, device_model, operator, dateline, md.status,
+            mu.name AS username
+        FROM mo_device md INNER JOIN mo_user mu ON mu.id = md.operator
+        WHERE batch_id = ?
+        ORDER BY dateline DESC
+    </sql>
+    <sql id="findByDeviceId">
+        SELECT d.*, mci.id AS car_id, mci.car_no,mci.terminal
+        FROM mo_device d
+            LEFT JOIN mo_car_info mci ON mci.device_id = d.id
+        WHERE device_code = ?
+    </sql>
+    <sql id="findByAll">
+        SELECT *
+        FROM mo_device
+        WHERE status = ?
+    </sql>
+    <sql id="importDevices">
+        INSERT INTO mo_device (batch_id, device_code, auth_code, device_model, operator, dateline,
+                               status)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    </sql>
+    <sql id="findForStatus">
+        SELECT count(*) c, CASE mdd.code
+                           WHEN 0
+                               THEN '无故障'
+                           WHEN 1
+                               THEN 'DPF风机报错'
+                           WHEN 16
+                               THEN 'DPF预热塞报错'
+                           WHEN 17
+                               THEN 'DPF油泵报错'
+                           WHEN 160
+                               THEN 'DPF温升失败'
+                           WHEN 257
+                               THEN '257'
+                           ELSE '无故障'
+                           END name
+        FROM
+            mo_device_data mdd
+            INNER JOIN mo_car_info mi ON mi.device_id = mdd.device_id
+        WHERE 1 = 1
+              AND mi.id IS NOT NULL
+              AND mdd.code IS NOT NULL
+        GROUP BY mdd.code
+    </sql>
+</sqlGroup>

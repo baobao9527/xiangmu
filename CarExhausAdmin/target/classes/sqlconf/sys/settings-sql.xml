@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="sys.settings">
+    <sql id="findByItem">
+        SELECT
+            id,
+            name,
+            item,
+            content,
+            create_time,
+            default_flag,
+            create_user,
+            last_update_time,
+            last_update_user
+        FROM mo_settings
+        WHERE item = ?
+    </sql>
+</sqlGroup>

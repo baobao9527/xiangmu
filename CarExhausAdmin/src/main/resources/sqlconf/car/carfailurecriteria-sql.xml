@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="carFailureCriteria">
+    <sql id="findByCarId">
+        SELECT id FROM mo_car_failure_criteria WHERE car_id = ?
+    </sql>
+    <sql id="deleteByCarId">
+        DELETE FROM mo_car_failure_criteria where 1=1
+    </sql>
+</sqlGroup>

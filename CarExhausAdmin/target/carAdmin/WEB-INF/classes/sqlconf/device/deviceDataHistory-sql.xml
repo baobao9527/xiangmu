@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2015-2016, AnHui Mobiao technology co. LTD Inc. All Rights Reserved.
+  -->
+
+<sqlGroup name="deviceDataHistory">
+    <sql id="easyui.datagrid">
+        SELECT mci.car_no, mci.terminal, mci.car_no_color, mci.car_flag, mci.car_model,
+               mci.car_framework_no, mddh.device_id, mddh.urea_temperature, mddh.urea_position,
+               mddh.gps_id, mddh.`dpf_before_temperature`, mddh.`dpf_arter_temperature`,
+               mddh.temperature_1, mddh.temperature_2, mddh.temperature_3, mddh.temperature_4,
+               mddh.report_time, mddh.pressure, mddh.obd, mddh.after_km, mddh.speed, mddh.flag_mileage,
+               mddh.flag_speed, mddh.temperature_1_flag, mddh.urea_temperature_flag,
+               mddh.urea_position_flag, mddh.temperature_2_flag, mddh.temperature_3_flag,
+               mddh.temperature_4_flag, mddh.pressure_flag, mddh.pm_value, mddh.no_value,
+               mddh.pm_value_flag, mddh.no_value_flag, mddh.code status, mddh.code errorcode
+               -- @where
+        FROM mo_device_data_history mddh
+                 LEFT JOIN mo_car_info mci ON mci.device_id = mddh.device_id
+             -- @condition
+        WHERE mddh.device_id = ?
+          AND mddh.report_time BETWEEN ? AND ?
+    </sql>
+
+    <sql id="create.datahistory">
+        CREATE TABLE IF NOT EXISTS `mo_device_data_history` (
+            `id`                     INT(11) UNSIGNED NOT NULL AUTO_INCREMENT
+                COMMENT '物理主键',
+            `device_id`              INT(11)                              DEFAULT NULL
+                COMMENT '设备主键',
+            `report_time`            DATETIME                             DEFAULT NULL
+                COMMENT '上报时间',
+            `fwh_version`            VARCHAR(120) COLLATE utf8_unicode_ci DEFAULT NULL
+                COMMENT '固件版本',
+            `software_version`       VARCHAR(120) COLLATE utf8_unicode_ci DEFAULT NULL
+                COMMENT '软件版本',
+            `obd`                    DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '里程',
+            `after_km`               DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '后处理采集里程',
+            `speed`                  DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '车速',
+            `engine_speed`           DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '发动机平均转速',
+            `torque`                 DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '扭矩',
+            `nox`                    DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT 'NOX浓度',
+            `curon`                  DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '瞬时油耗',
+            `engine_load`            DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '发动机负荷',
+            `dpf_before_temperature` DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT 'DPF前温',
+            `dpf_arter_temperature`  DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT 'DPF后温',
+            `urea_temperature`       DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '尿素温度',
+            `urea_position`          DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '尿素液位',
+            `temperature_1`          DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '温度1℃',
+            `temperature_2`          DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '温度2℃',
+            `temperature_3`          DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '温度3℃',
+            `temperature_4`          DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '温度4℃',
+            `pressure`               DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '排气管压差',
+            `flag_mileage`           SMALLINT(1)                          DEFAULT '0'
+                COMMENT '里程是否失效(0:正常;1:高于;2:低于)',
+            `flag_speed`             SMALLINT(1)                          DEFAULT '0'
+                COMMENT '车速是否失效(0:正常;1:高于;2:低于)',
+            `temperature_1_flag`     SMALLINT(1)                          DEFAULT '0'
+                COMMENT '温度1℃是否失效(0:正常;1:高于;2:低于)',
+            `urea_temperature_flag`  SMALLINT(1)                          DEFAULT '0'
+                COMMENT '尿素温度是否失效(0:正常;1:高于;2:低于)',
+            `urea_position_flag`     SMALLINT(1)                          DEFAULT '0'
+                COMMENT '尿素液位是否失效(0:正常;1:高于;2:低于)',
+            `temperature_2_flag`     SMALLINT(1)                          DEFAULT '0'
+                COMMENT '温度2℃是否失效(0:正常;1:高于;2:低于)',
+            `temperature_3_flag`     SMALLINT(1)                          DEFAULT '0'
+                COMMENT '温度3℃是否失效(0:正常;1:高于;2:低于)',
+            `temperature_4_flag`     SMALLINT(1)                          DEFAULT '0'
+                COMMENT '温度4℃是否失效(0:正常;1:高于;2:低于)',
+            `pressure_flag`          SMALLINT(1)                          DEFAULT '0'
+                COMMENT '压差是否失效(0:正常;1:高于;2:低于)',
+            `pm_value`               DECIMAL(18, 2)                       DEFAULT NULL,
+            `no_value`               DECIMAL(18, 2)                       DEFAULT NULL,
+            `no_value_flag`          SMALLINT(1)                          DEFAULT NULL,
+            `pm_value_flag`          SMALLINT(1)                          DEFAULT NULL,
+            `code`                   DECIMAL(18, 2)                       DEFAULT NULL
+                COMMENT '错误码',
+            `gps_id`                 BIGINT(20)       NOT NULL            DEFAULT '0',
+            PRIMARY KEY (`id`),
+            KEY `idx_device_id` (`device_id`),
+            KEY `idx_device_gps` (`gps_id`),
+            KEY `idx_history_report_time` (`report_time`),
+            KEY `idx_deviceid_reporttime` (`device_id`, `report_time`)
+        )
+            ENGINE = MyISAM
+            AUTO_INCREMENT = 42672733
+            DEFAULT CHARSET = utf8
+            COLLATE = utf8_unicode_ci
+            COMMENT ='历史监控数据'
+    </sql>
+
+
+    <sql id="create.gps">
+        CREATE TABLE IF NOT EXISTS `mo_car_gps` (
+            `id`              BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '物理主键',
+            `device_id`       INT(11)    NOT NULL COMMENT '设备ID',
+            `gps_longitude`   VARCHAR(50) COLLATE utf8_unicode_ci DEFAULT NULL
+                COMMENT 'GPS设备经度',
+            `gps_latitude`    VARCHAR(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'GPS设备纬度',
+            `baidu_longitude` DOUBLE                              DEFAULT NULL COMMENT '百度地图经度',
+            `baidu_latitude`  DOUBLE                              DEFAULT NULL COMMENT '百度地图纬度',
+            `timestamp`       BIGINT(13)                          DEFAULT NULL COMMENT '时间戳',
+            `create_date`     DATE                                DEFAULT NULL COMMENT '创建日期',
+            `create_time`     DATETIME                            DEFAULT NULL COMMENT '创建时间',
+            `device_data`     BIGINT(11)                          DEFAULT NULL COMMENT '记录的主键',
+            PRIMARY KEY (`id`),
+            KEY `idx_gps_device` (`device_id`),
+            KEY `idx_gps_baidu_latitude` (`baidu_latitude`),
+            KEY `idx_gps_baidu_longitude` (`baidu_longitude`),
+            KEY `idx_gps_timestamp` (`timestamp`)
+        )
+            ENGINE = MyISAM
+            AUTO_INCREMENT = 42679087
+            DEFAULT CHARSET = utf8
+            COLLATE = utf8_unicode_ci
+            COMMENT ='汽车GPS记录'
+    </sql>
+
+    <sql id="create.gps.miniute">
+        CREATE TABLE `mo_car_gps_time` (
+            `id`              bigint(20) NOT NULL AUTO_INCREMENT COMMENT '物理主键',
+            `device_id`       int(11)    NOT NULL COMMENT '设备ID',
+            `gps_latitude`    varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'GPS设备经度',
+            `gps_longitude`   varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'GPS设备纬度',
+            `baidu_longitude` double                              DEFAULT NULL COMMENT '百度地图经度',
+            `baidu_latitude`  double                              DEFAULT NULL COMMENT '百度地图纬度',
+            `timestamp`       bigint(13)                          DEFAULT NULL COMMENT '时间戳',
+            `create_time`     datetime                            DEFAULT NULL COMMENT '创建时间',
+            PRIMARY KEY (`id`),
+            KEY `idx_gps_device` (`device_id`),
+            KEY `idx_gps_baidu_latitude` (`baidu_latitude`),
+            KEY `idx_gps_baidu_longitude` (`baidu_longitude`),
+            KEY `idx_gps_timestamp` (`timestamp`)
+        )
+            ENGINE = MyISAM
+            DEFAULT CHARSET = utf8
+            COLLATE = utf8_unicode_ci COMMENT ='汽车GPS分钟位置'
+    </sql>
+
+    <sql id="delete.historyByDate">
+        DELETE
+        FROM `mo_device_data_history`
+        WHERE report_time BETWEEN ? AND ?
+    </sql>
+
+    <sql id="delete.gpsByDate">
+        DELETE
+        FROM `mo_car_gps`
+        WHERE create_time BETWEEN ? AND ?
+    </sql>
+
+    <sql id="temperature.month">
+        SELECT DATE_FORMAT(report_time, '%Y-%m') AS xdate,
+               AVG(temperature_3) AS dpf_before_pressure, AVG(temperature_4) AS dpf_after_pressure,
+               AVG(pressure) AS pressure,
+               AVG(dpf_before_temperature) AS dpf_before_temperature,
+               AVG(dpf_arter_temperature) AS dpf_arter_temperature,
+               AVG(temperature_1) AS doc_before_temperature
+        FROM mo_device_data_history
+        WHERE device_id = ?
+          AND report_time BETWEEN ? AND ?
+        GROUP BY DATE_FORMAT(report_time, '%Y-%m')
+    </sql>
+
+    <sql id="temperature.day">
+        SELECT DATE_FORMAT(report_time, '%m-%d') AS xdate,
+               AVG(temperature_3) AS dpf_before_pressure, AVG(temperature_4) AS dpf_after_pressure,
+               AVG(pressure) AS pressure,
+               AVG(dpf_before_temperature) AS dpf_before_temperature,
+               AVG(dpf_arter_temperature) AS dpf_arter_temperature,
+               AVG(temperature_1) AS doc_before_temperature
+        FROM mo_device_data_history
+        WHERE device_id = ?
+          AND report_time BETWEEN ? AND ?
+        GROUP BY DATE_FORMAT(report_time, '%m-%d')
+    </sql>
+
+    <sql id="temperature.hour">
+        SELECT DATE_FORMAT(report_time, '%H') AS xdate,
+               AVG(temperature_3) AS dpf_before_pressure, AVG(temperature_4) AS dpf_after_pressure,
+               AVG(pressure) AS pressure,
+               AVG(dpf_before_temperature) AS dpf_before_temperature,
+               AVG(dpf_arter_temperature) AS dpf_arter_temperature,
+               AVG(temperature_1) AS doc_before_temperature
+        FROM mo_device_data_history
+        WHERE device_id = ?
+          AND report_time BETWEEN ? AND ?
+        GROUP BY DATE_FORMAT(report_time, '%H')
+    </sql>
+    <sql id="temperature.minutes">
+        SELECT DATE_FORMAT(report_time, '%H:%i') AS xdate,
+               AVG(temperature_3) AS dpf_before_pressure, AVG(temperature_4) AS dpf_after_pressure,
+               AVG(pressure) AS pressure,
+               AVG(dpf_before_temperature) AS dpf_before_temperature,
+               AVG(dpf_arter_temperature) AS dpf_arter_temperature,
+               AVG(temperature_1) AS doc_before_temperature
+        FROM mo_device_data_history
+        WHERE device_id = ?
+          AND report_time BETWEEN ? AND ?
+        GROUP BY DATE_FORMAT(report_time, '%i')
+    </sql>
+</sqlGroup>

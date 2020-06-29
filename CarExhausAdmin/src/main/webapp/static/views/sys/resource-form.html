@@ -1,0 +1,21 @@
+<form id="uiform">
+    <table class="grid">
+        <tr><td align="right">资源编码：</td><td><input type="text" style="width:280px;" id="txt_Code" name="resource.code" class="txt03 required" /></td></tr>
+        <tr><td align="right">资源名称：</td><td><input type="text" style="width:280px;" id="txt_FullName" name="resource.name" class="txt03 required" /></td></tr>
+        <tr><td align="right">资源类型：</td><td><input type="text"  style="width:280px;" id="txt_Category" name="resource.style" class="txt03 required" /></td></tr>
+        <tr><td align="right">上级菜单：</td><td><input type="text" style="width:280px;" id="txt_ParentId" name="resource.parent" class="txt03" /></td></tr>
+        <tr><td align="right">链接地址：</td><td><input type="text" style="width:280px;" id="txt_NavigateUrl" name="resource.path" class="txt03" /></td></tr>
+        <tr><td align="right">图标：</td><td><span id="smallIcon" class="icon icon-note">&nbsp;&nbsp;</span>
+            <input type="text" style="width:240px;" value="icon-note" id="txt_IconCss" name="resource.icon" class="txt03" />&nbsp;
+            <a id="selecticon" ref="javascript:;" plain="true" class="easyui-linkbutton" icon="icon-search" title="选择图标"></a></td></tr>
+        <tr>
+            <td align="right">选项：</td>
+            <td>
+                <input type="checkbox" class="txt03" name="resource.status" id="chk_Enabled"  value="1"/><label>启用</label>
+            </td>
+        </tr>
+        <tr><td align="right">排序：</td><td><input type="text" style="width:280px;"  value="1" id="txt_sort" name="resource.sort" class="txt03" /></td></tr>
+        <tr><td align="right">描述：</td><td><textarea style="width:350px;height:70px;" class="txt03" name="resource.description" id="txt_Description" ></textarea></td></tr>
+    </table>
+    <input type="hidden"  id="rsid" name="resource.id" />
+</form>

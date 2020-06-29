@@ -1,0 +1,118 @@
+<form id="invalidForm">
+    <div id="car" fit="true" style="overflow: hidden;">
+        <div title="监控失效标准" style="padding: 2px; ">
+            <input type="hidden" id="car_id" name="failure.car_id" value="">
+            <table class="grid">  <tr>
+                <td align="left">DOC前温最大：</td>
+                <td colspan="4"><input type="text" name="failure.temperature_1_max"
+                                       class="txt01 easyui-validatebox"
+                                       id="temperature_1_max" data-options="required:true,missingMessage:'请输入DOC前温最大',validType: 'floats'"/></td>
+                <td align="left">最大车速：</td>
+                <td colspan="4"><input type="text" name="failure.max_speed"
+                                       class="txt01 easyui-validatebox"
+                                       id="max_speed" data-options="required:true,missingMessage:'请输入最大里程',validType: 'floats'"/></td>
+            </tr>
+                <tr>
+                    <td align="left">DOC前温最小：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_1_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_1_min" data-options="required:true,missingMessage:'请输入DOC前温最小',validType: 'floats'"/></td>
+                    <td align="left">最小车速：</td>
+                    <td colspan="4"><input type="text" name="failure.min_speed"
+                                           class="txt01 easyui-validatebox"
+                                           id="min_speed" data-options="required:true,missingMessage:'请输入最小车速',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">SCR后温最大：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_2_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_2_max" data-options="required:true,missingMessage:'请输入SCR后温最大',validType: 'floats'"/></td>
+                    <td align="left">最大里程：</td>
+                    <td colspan="4"><input type="text" name="failure.max_mileage"
+                                           class="txt01 easyui-validatebox"
+                                           id="max_mileage" data-options="required:true,missingMessage:'请输入最大里程',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">SCR后温最小：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_2_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_2_min" data-options="required:true,missingMessage:'请输入SCR后温最小',validType: 'floats'"/></td>
+                    <td align="left">最小里程：</td>
+                    <td colspan="4"><input type="text" name="failure.min_mileage"
+                                           class="txt01 easyui-validatebox"
+                                           id="min_mileage" data-options="required:true,missingMessage:'请输入最小里程',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">DPF前压力最大：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_3_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_3_max" data-options="required:true,missingMessage:'请输入DPF前压力最大',validType: 'floats'"/></td>
+                    <td align="left">尿素温度最大：</td>
+                    <td colspan="4"><input type="text" name="failure.urea_temperature_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="urea_temperature_max" data-options="required:true,missingMessage:'请输入尿素液位最大',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">DPF前压力最小：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_3_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_3_min" data-options="required:true,missingMessage:'请输入DPF前压力最小',validType: 'floats'"/></td>
+                    <td align="left">尿素温度最小：</td>
+                    <td colspan="4"><input type="text" name="failure.urea_temperature_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="urea_temperature_min" data-options="required:true,missingMessage:'请输入尿素温度最小',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">DPF后压力最大：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_4_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_4_max" data-options="required:true,missingMessage:'请输入DPF后压力最大',validType: 'floats'"/></td>
+                    <td align="left">尿素液位最大：</td>
+                    <td colspan="4"><input type="text" name="failure.urea_position_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="urea_position_max" data-options="required:true,missingMessage:'请输入尿素液位最大',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">DPF后压力最小：</td>
+                    <td colspan="4"><input type="text" name="failure.temperature_4_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="temperature_4_min" data-options="required:true,missingMessage:'请输入DPF后压力最小',validType: 'floats'"/></td>
+                    <td align="left">尿素液位最小：</td>
+                    <td colspan="4"><input type="text" name="failure.urea_position_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="urea_position_min" data-options="required:true,missingMessage:'请输入尿素液位最小',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">压差最大：</td>
+                    <td colspan="4"><input type="text" name="failure.pressure_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="pressure_max" data-options="required:true,missingMessage:'请输入压差最大',validType: 'floats'"/></td>
+                    <td align="left">压差最小：</td>
+                    <td colspan="4"><input type="text" name="failure.pressure_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="pressure_min" data-options="required:true,missingMessage:'请输入压差最小',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">PM净化量最大：</td>
+                    <td colspan="4"><input type="text" name="failure.pm_value_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="pm_value_max" data-options="required:true,missingMessage:'请输入PM净化量最大',validType: 'floats'"/></td>
+                    <td align="left">PM净化量最小：</td>
+                    <td colspan="4"><input type="text" name="failure.pm_value_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="pm_value_min" data-options="required:true,missingMessage:'请输入PM净化量最小',validType: 'floats'"/></td>
+                </tr>
+                <tr>
+                    <td align="left">NO净化量最大：</td>
+                    <td colspan="4"><input type="text" name="failure.no_value_max"
+                                           class="txt01 easyui-validatebox"
+                                           id="no_value_max" data-options="required:true,missingMessage:'请输入NO净化量最大',validType: 'floats'"/></td>
+                    <td align="left">NO净化量最小：</td>
+                    <td colspan="4"><input type="text" name="failure.no_value_min"
+                                           class="txt01 easyui-validatebox"
+                                           id="no_value_min" data-options="required:true,missingMessage:'请输入NO净化量最小',validType: 'floats'"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>
